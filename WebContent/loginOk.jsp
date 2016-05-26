@@ -9,12 +9,12 @@
 	String pw = request.getParameter("pw");
 	String appKey = request.getParameter("appkey");
 	String kakaoId = request.getParameter("kakaoId");
-	String kakaoName = request.getParameter("kakao");
+	String kakaoName = request.getParameter("kakaoName");
 	
 	System.out.println("res:" + kakaoId);
 	
 	MemberDao dao = MemberDao.getInstance();
-	if(kakaoId.equals("")) {
+	if(kakaoId.equals("1")) {
 		int checkNum = dao.userCheck(email, pw);
 		if(checkNum == -1) {
 %>
@@ -49,23 +49,29 @@
 			}
 		}
 	} else {
-		int checkNum = dao.confirmKakao(kakaoId);
-		if (checkNum == 1) {
+		int checkKakao = dao.confirmKakao(kakaoId);
+		%>
+		<script>
+		 alert('<%= checkKakao %>'); 
+		 </script>
+		<% 
+		if (checkKakao == 1) {
 			MemberDto dto = dao.getMember(kakaoId);
-			
 			if(dto == null) {
-				session.setAttribute("kakaoId", kakaoId);
-				session.setAttribute("kakaoName", kakaoName);
-				session.setAttribute("kakaoJoin", "kakaoJoin");
-				response.sendRedirect("join.jsp");
 			} else {
 				String name = dto.getName();
-				session.setAttribute("kakaoId", kakaoId);
+				session.setAttribute("email", kakaoId);
+				session.setAttribute("isKakao", checkKakao);
 				session.setAttribute("name", name);
 				session.setAttribute("ValidMem", "yes");
 				session.setAttribute("appKey", appKey);
 				response.sendRedirect("main.jsp");
 			}
+		} else {
+				session.setAttribute("kakaoId", kakaoId);
+				session.setAttribute("kakaoName", kakaoName);
+				session.setAttribute("kakaoJoin", "kakaoJoin");
+				response.sendRedirect("join.jsp");
 		}
 	}
 %>

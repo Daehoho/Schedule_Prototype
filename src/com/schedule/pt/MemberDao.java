@@ -32,7 +32,7 @@ public class MemberDao {
 
 		Connection connection = null;
 		PreparedStatement pstmt = null;
-		String query = "insert into s_members values (?, ?, ?, ?, ?, ?)";
+		String query = "insert into s_members values (?, ?, ?, ?)";
 
 		try {
 			connection = getConnection();
@@ -40,8 +40,7 @@ public class MemberDao {
 			pstmt.setString(1, dto.geteMail());
 			pstmt.setString(2, dto.getPw());
 			pstmt.setString(3, dto.getName());
-			pstmt.setDate(4, dto.getBirth());
-			pstmt.setInt(5, dto.getIsKakao());
+			pstmt.setInt(4, dto.getIsKakao());
 			pstmt.executeUpdate();
 			ri = MemberDao.MEMBER_JOIN_SUCCESS;
 		} catch (Exception e) {
@@ -197,7 +196,7 @@ public class MemberDao {
 		Connection connection = null;
 		PreparedStatement pstmt = null;
 		ResultSet set = null;
-		String query = "select email from s_member where email = ?";
+		String query = "select email from s_members where email = ?";
 		
 		try {
 			connection = getConnection();
@@ -208,7 +207,7 @@ public class MemberDao {
 			if(set.next()) {
 				ri = MemberDao.MEMBER_KAKAO_IS_SUCCESS;
 			} else {
-				ri = MemberDao.MEMBER_LOGIN_IS_NOT;
+				ri = MemberDao. MEMBER_KAKAO_IS_NOT;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -230,7 +229,7 @@ public class MemberDao {
 		Connection connection = null;
 		try {
 			context = new InitialContext();
-			dataSource = (DataSource)context.lookup("java:com/env/jdbc/Oracle11g");
+			dataSource = (DataSource)context.lookup("java:comp/env/jdbc/Oracle11g");
 			connection = dataSource.getConnection();
 		} catch (Exception e) {
 			e.printStackTrace();

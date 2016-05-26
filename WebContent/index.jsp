@@ -19,8 +19,8 @@
 		<input type="email" name="email" placeholder="Email">
 		<input type="password" name="password" placeholder="Password">
 		<input type="hidden" name="appkey" value="<%= appKey %>">
-		<input type="hidden" name="kakaoId" id="kakaoId" value="">
-		<input type="hidden" name="kakaoNamNamee" id="kakaoName" value="">
+		<input type="hidden" name="kakaoId" id="kakaoId" value="1">
+		<input type="hidden" name="kakaoName" id="kakaoName" value="">
 		
 		<label for="remember">
 			<input name="remember" type="checkbox">기억하기
