@@ -1,0 +1,42 @@
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<% request.setCharacterEncoding("EUC-KR"); %>
+<%
+	String kakaoId = (String)session.getAttribute("kakaoId");
+	String kakaoName = (String)session.getAttribute("kakaoName");
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="joinOk.jsp" method="post" = name="reg_frm">
+	<fieldset>
+		<legend>Register</legend>
+		
+	<% if(session.getAttribute("kakaoJoin") != null) {%>
+		<label for="name">name</label>
+		<input id="name" type="text" placeholder="name">
+		
+		<input id="email" type="hidden" name="email" placeholder="Email">
+	<% } else {%>
+		<label for="name">name</label>
+		<input id="name" type="text" placeholder="name">
+		
+		<label for="email">Email</label>
+		<input id="email" type="email" name="email" placeholder="Email">
+	<% } %>
+		
+		
+		<label for="password">password1</label>
+		<input id="password" type="password" placeholder="Password">
+		
+		<button type="submit">Register</button>
+		
+	</fieldset>
+</form>
+</body>
+</html>

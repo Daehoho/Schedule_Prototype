@@ -56,6 +56,7 @@
 			if(dto == null) {
 				session.setAttribute("kakaoId", kakaoId);
 				session.setAttribute("kakaoName", kakaoName);
+				session.setAttribute("kakaoJoin", "kakaoJoin");
 				response.sendRedirect("join.jsp");
 			} else {
 				String name = dto.getName();
