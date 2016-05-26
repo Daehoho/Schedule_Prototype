@@ -20,6 +20,7 @@
 		<input type="password" name="password" placeholder="Password">
 		<input type="hidden" name="appkey" value="<%= appKey %>">
 		<input type="hidden" name="kakaoId" id="kakaoId" value="">
+		<input type="hidden" name="kakaoNamNamee" id="kakaoName" value="">
 		
 		<label for="remember">
 			<input name="remember" type="checkbox">기억하기
@@ -41,8 +42,9 @@
       				Kakao.API.request({
       				    url: '/v1/user/me',
       				    success: function(res) {
-      			    	  alert(JSON.stringify(res.id));
+      			    	  alert(JSON.stringify(res));
       						document.getElementById("kakaoId").value = res.id;
+      						document.getElementById("kakaoName").value = res.properties.nickname;
       						document.getElementById("form1").submit();
       			    	},
       			    	fail: function(error) {

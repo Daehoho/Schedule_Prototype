@@ -9,6 +9,7 @@
 	String pw = request.getParameter("pw");
 	String appKey = request.getParameter("appkey");
 	String kakaoId = request.getParameter("kakaoId");
+	String kakaoName = request.getParameter("kakao");
 	
 	System.out.println("res:" + kakaoId);
 	
@@ -53,18 +54,16 @@
 			MemberDto dto = dao.getMember(kakaoId);
 			
 			if(dto == null) {
-%>
-			<script language="javascript">
-				alert("존재하지 않는 회원 입니다.");
-				history.go(-1);
-			</script>
-<%
+				session.setAttribute("kakaoId", kakaoId);
+				session.setAttribute("kakaoName", kakaoName);
+				response.sendRedirect("join.jsp");
 			} else {
 				String name = dto.getName();
 				session.setAttribute("kakaoId", kakaoId);
 				session.setAttribute("name", name);
 				session.setAttribute("ValidMem", "yes");
 				session.setAttribute("appKey", appKey);
+				response.sendRedirect("main.jsp");
 			}
 		}
 	}
@@ -77,19 +76,6 @@
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
 <body>
-<%! 
-	String email, pw, res;
-%>
-
-<%
-	email = request.getParameter("email");
-	pw = request.getParameter("password");
-	res = request.getParameter("kakao");
-	System.out.println("email:" + email);
-	System.out.println("pw:" + pw);
-	System.out.println("res:" + res);
-%>
-
 
 </body>
 </html>
