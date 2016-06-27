@@ -2,6 +2,7 @@
 <%@ page import = "com.schedule.pt.MemberDao" %>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+    <!--  Test -->
 <%
 	request.setCharacterEncoding("EUC-KR");
 	
